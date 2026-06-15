@@ -174,6 +174,7 @@ export default function Contact() {
                 ✗ Failed to send. Please try again.
               </motion.p>
             )}
+            {status === 'success' && (
               <motion.p 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
