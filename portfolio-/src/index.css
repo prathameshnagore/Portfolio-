@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-blue: #3B82F6;
+  --color-primary-indigo: #6366F1;
+  --color-bg-main: #F8FAFC;
+  --color-bg-card: #FFFFFF;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
+  --color-border-main: #E2E8F0;
+  --color-accent-success: #22C55E;
+  --color-accent-highlight: #F59E0B;
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--color-bg-main)] text-[var(--color-text-primary)] font-sans antialiased overflow-x-hidden;
+    background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 100%);
+    background-attachment: fixed;
+  }
+
+  body::before {
+    content: "";
+    @apply fixed inset-0 pointer-events-none opacity-[0.03] z-[-1];
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233b82f6' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2v-4h4v-2H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+.glass-card {
+  @apply bg-white/70 backdrop-blur-[12px] border border-white/40 shadow-[0_10px_30px_rgba(0,0,0,0.04)];
+  border-radius: 24px;
+}
+
+.btn-primary {
+  @apply bg-gradient-to-r from-[var(--color-primary-blue)] to-[var(--color-primary-indigo)] text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300;
+}
+
+.btn-secondary {
+  @apply bg-white border border-[var(--color-border-main)] text-[var(--color-text-primary)] font-semibold py-3 px-8 rounded-full shadow-sm hover:shadow-md hover:bg-slate-50 transition-all duration-300;
+}
+
+.section-container {
+  @apply max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8;
+}
+
+.section-heading {
+  @apply text-4xl font-bold text-[var(--color-text-primary)] mb-12 relative inline-block;
+}
+
+.section-heading::after {
+  content: '';
+  @apply absolute -bottom-2 left-0 w-1/2 h-1.5 bg-gradient-to-r from-[var(--color-primary-blue)] to-[var(--color-primary-indigo)] rounded-full;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[var(--color-primary-blue)] to-[var(--color-primary-indigo)];
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-blue-300/50 rounded-full hover:bg-blue-400/50;
+}
+
+.scroll-progress {
+  @apply fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--color-primary-blue)] to-[var(--color-primary-indigo)] z-[100] origin-left;
+}
