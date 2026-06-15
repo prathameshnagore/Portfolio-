@@ -174,7 +174,6 @@ export default function Contact() {
                 ✗ Failed to send. Please try again.
               </motion.p>
             )}
-            {status === 'success' && (
               <motion.p 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -182,7 +181,7 @@ export default function Contact() {
               >
                 ✓ Message sent! I'll get back to you within 24 hours.
               </motion.p>
-            )}
+            
           </form>
         </motion.div>
       </div>
