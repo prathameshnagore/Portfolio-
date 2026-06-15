@@ -6,15 +6,25 @@ export default function Contact() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setStatus('loading')
-    // Simulate API call
-    setTimeout(() => {
-      setStatus('success')
-      setFormData({ name: '', email: '', message: '' })
-      setTimeout(() => setStatus('idle'), 3000)
-    }, 1500)
+    try {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: formData.email, message: `Name: ${formData.name}\n\n${formData.message}` }),
+      })
+      if (res.ok) {
+        setStatus('success')
+        setFormData({ name: '', email: '', message: '' })
+        setTimeout(() => setStatus('idle'), 3000)
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -155,7 +165,15 @@ export default function Contact() {
               <Send size={18} className={status === 'loading' ? 'hidden' : ''} />
             </button>
 
-            {status === 'success' && (
+            {status === 'error' && (
+              <motion.p 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-center text-red-600 font-bold text-sm bg-red-50 py-3 rounded-lg border border-red-100"
+              >
+                ✗ Failed to send. Please try again.
+              </motion.p>
+            )}
               <motion.p 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
